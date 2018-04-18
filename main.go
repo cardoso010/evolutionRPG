@@ -18,9 +18,17 @@ func main() {
 	fmt.Println("------------------")
 	fmt.Println("Escolha uma mapa para jogar:")
 
-	cave := models.Cave{}
-	for i, mapa := range cave.ListCave() {
+	caveModel := models.Cave{}
+	caves := caveModel.ListCave()
+	for i, mapa := range caves {
 		fmt.Printf("[%d] - %s \n", i, mapa.Name)
 	}
+
+	var caveSelect int 
+	fmt.Scan(&caveSelect)
+	mapaEscolhido := caves[caveSelect]
+	fmt.Println(mapaEscolhido)
+
+
 
 }
