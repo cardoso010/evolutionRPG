@@ -7,7 +7,7 @@ import (
 
 // Action responsavel pelos metodos de acao
 type Action interface {
-	Attack(attacked struct{})
+	Attack(attacked *struct{})
 	Defend() bool
 }
 
@@ -29,16 +29,16 @@ type Person struct {
 }
 
 // Attack metodo responsavel por atacar
-func (person *Person) Attack(attacked struct{}) {
+func (person Person) Attack(attacked *Creature) {
 	if !attacked.Defend() {
-		*attacked.Hp = *attacked.Hp - rand.Intn(100)
+		attacked.Hp = attacked.Hp - rand.Intn(100)
 	}
 
 }
 
 // Defend e metodo responsavel por defender
 func (person Person) Defend() bool {
-	if rand.Intn(1) {
+	if value := rand.Intn(1); value == 1 {
 		return true
 	}
 	return false
@@ -53,15 +53,15 @@ type Creature struct {
 }
 
 // Attack metodo responsavel por atacar
-func (creature *Creature) Attack(attacked struct{}) {
+func (creature Creature) Attack(attacked *Person) {
 	if !attacked.Defend() {
-		*attacked.Hp = *attacked.Hp - rand.Intn(100)
+		attacked.Hp = attacked.Hp - rand.Intn(100)
 	}
 }
 
 // Defend metodo responsavel por defender a creature
 func (creature Creature) Defend() bool {
-	if rand.Intn(1) {
+	if value := rand.Intn(1); value == 1 {
 		return true
 	}
 	return false
@@ -134,17 +134,17 @@ func (cave Cave) ListCave() []Cave {
 	}
 }
 
-func Fight(attack *interface{}, attacked *interface{}) {
+func Fight(attack *Person, attacked *Creature) {
 	for {
-		attack.Attack(&attacked)
-		if *attacked.Hp <= 0 {
+		attack.Attack(attacked)
+		if attacked.Hp <= 0 {
 			fmt.Println(attacked.Name, "está morto!")
-			*attack.Exp = *attack.Exp + *attacked.Exp
+			attack.Exp = attack.Exp + attacked.Exp
 			break
 		}
 
-		attacked.Attack(&attack)
-		if *attack.Hp <= 0 {
+		attacked.Attack(attack)
+		if attack.Hp <= 0 {
 			fmt.Println(attack.Name, "está morto!")
 			break
 		}

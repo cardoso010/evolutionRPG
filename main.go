@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	char := models.Person{Level: 1, Experience: 0, Hp: 100, Skill: models.Skill{Force: 0, Defense: 0}}
+	char := models.Person{Level: 1, Exp: 0, Hp: 100, Skill: models.Skill{Force: 0, Defense: 0}}
 
 	fmt.Println("Digite um nome:")
 	fmt.Scan(&char.Name)
