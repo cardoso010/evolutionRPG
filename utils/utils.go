@@ -1,11 +1,10 @@
 package utils
 
 import (
+	"../models"
 	"fmt"
 	"os"
 	"os/exec"
-
-	"../models"
 )
 
 func Clear() {
