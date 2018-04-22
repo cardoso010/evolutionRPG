@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	char := models.Person{Level: 1, Exp: 0, Hp: 100, Skill: models.Skill{Force: 0, Defense: 0}}
+	char := models.Person{Level: 1, Exp: 0, Hp: 100, Skill: models.Skill{Force: 10, Defense: 10}}
 
 	fmt.Println("Digite um nome:")
 	fmt.Scan(&char.Name)
@@ -31,13 +31,11 @@ func main() {
 
 	fmt.Println(mapaEscolhido.Name)
 
-	fmt.Println("Creature:")
+	utils.Clear()
+
+	fmt.Println("Creature's map:")
 	for _, creature := range mapaEscolhido.Creature {
-		fmt.Println("------------------------")
-		fmt.Println("Name:", creature.Name)
-		fmt.Println("HP:", creature.Hp)
-		fmt.Println("Force:", creature.Force)
-		fmt.Println("Defense:", creature.Defense)
+		utils.Creature(creature)
 	}
 	fmt.Println("------------------------")
 
@@ -51,6 +49,6 @@ func main() {
 		models.Fight(&char, &monster)
 	}
 
-	fmt.Println("Exp:", char.Exp)
+	utils.Perfil(char)
 
 }
